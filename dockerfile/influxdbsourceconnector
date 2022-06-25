@@ -1,0 +1,8 @@
+#Docker file for influxdb connector
+FROM bitnami/kafka:latest
+RUN mkdir -p /opt/bitnami/kafka/plugins && \
+    cd /opt/bitnami/kafka/plugins
+WORKDIR /opt/bitnami/kafka/plugins
+#confluentinc-kafka-connect-influxdb-1.2.3 is the unzip from InfluxdbSourceConnector.
+COPY ./confluentinc-kafka-connect-influxdb-1.2.3/ ./confluentinc-kafka-connect-influxdb-1.2.3
+CMD /opt/bitnami/kafka/bin/connect-standalone.sh /bitnami/kafka/config/connect-standalone.properties /bitnami/kafka/config/influxdb.properties
